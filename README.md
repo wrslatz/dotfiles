@@ -1,2 +1,3 @@
 # dotfiles
-My dotfiles, managed using chezmoi
+
+My dotfiles, managed using [chezmoi](https://www.chezmoi.io/)
