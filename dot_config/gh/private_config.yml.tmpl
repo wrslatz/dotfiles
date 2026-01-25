@@ -33,5 +33,13 @@ aliases:
     reset-remote-upstream-main: '!gh reset-remote upstream main'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# WSL-specific settings
+
 # What web browser gh should use when opening URLs. If blank, will refer to environment.
 browser: wslview
+
+{{   end }}
+{{ end }}
