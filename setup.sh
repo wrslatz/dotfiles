@@ -9,34 +9,60 @@
 
 # Explain what the script does and prompt for confirmation
 printf "This script will set up your system with the following:\n"
-printf "1. Change your default shell to zsh\n"
-printf "2. Install Homebrew package manager\n"
-printf "3. Install oh-my-zsh framework\n"
-printf "4. Install chezmoi and apply wrslatz's dotfiles configuration\n"
-read -p "Do you want to proceed? (y/n) " -n 1 -r
+printf "1. Install and change your default shell to zsh\n"
+printf "2. Install git (dependency of Homebrew)\n"
+printf "3. Install Homebrew\n"
+printf "4. Install oh-my-zsh framework\n"
+printf "5. Install chezmoi and apply wrslatz's dotfiles configuration\n"
+printf "Do you want to proceed? (y/n) "
+read -r PROCEED_REPLY
 printf "\n"
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [ "$PROCEED_REPLY" = "y" ] || [ "$PROCEED_REPLY" = "Y" ]; then
     printf "Proceeding with setup...\n"
 else
     printf "Setup aborted.\n"
     exit 1
 fi
 
-# Set shell to zsh, if necessary
+# Install zsh, if necessary
 if [ -n "$ZSH_VERSION" ]; then
     printf "Current shell is already zsh\n"
 else
-    printf "Changing shell to zsh...\n"
-    chsh -s $(which zsh)
+    ZSH_PATH=$(command -v zsh)
+    if [ -z "$ZSH_PATH" ]; then
+        printf "zsh not found in PATH. Installing zsh...\n"
+        sudo apt install zsh
+        chsh -s "$(command -v zsh)"
+    else
+        printf "zsh is already installed.\n"
+    fi
+fi
+
+# Install git (prerequisite for Homebrew), if not already installed
+if command -v git >/dev/null 2>&1; then
+    printf 'git is already installed\n'
+else
+    printf 'Installing git...\n'
+    sudo apt install git
 fi
 
 # Install Homebrew, if necessary
-if which -s brew; then
+if command -v brew >/dev/null 2>&1; then
     printf 'Homebrew is already installed\n'
 else
     printf 'Installing Homebrew...\n'
     # Only install Homebrew, do not modify shell files as they are managed by chezmoi
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Add Homebrew to PATH for the current session
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Verify Homebrew installation
+if command -v brew >/dev/null 2>&1; then
+    printf "Homebrew installation verified.\n"
+else
+    printf "Homebrew installation failed. Exiting.\n"
+    exit 1
 fi
 
 # Install oh-my-zsh, if necessary
@@ -47,18 +73,31 @@ else
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-# Install chezmoi
-/home/linuxbrew/.linuxbrew/bin/brew install chezmoi
+# Install chezmoi, if necessary
+if command -v chezmoi >/dev/null 2>&1; then
+    printf "chezmoi is already installed\n"
+else
+    printf "Installing chezmoi...\n"
+    brew install chezmoi
+fi
 
 # Initialize and apply chezmoi configuration
-chezmoi init wrslatz
+printf "Initializing chezmoi with wrslatz's dotfiles...\n"
+chezmoi init wrslatz --verbose
+chezmoi git pull
+
+printf "Review changes to be applied by chezmoi...\n"
 chezmoi diff
 
 # Prompt yes or no before applying changes
-read -p "Apply these changes? (y/n) " -n 1 -r
+printf "Apply these changes? (y/n) "
+read -r APPLY_CHANGES_REPLY
 printf "\n"
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+if [ "$APPLY_CHANGES_REPLY" = "y" ] || [ "$APPLY_CHANGES_REPLY" = "Y" ]; then
     chezmoi apply -v
+else
+    printf "Exiting.\n"
+    exit 1
 fi
 
 # Finally, source zsh configuration to complete setup
