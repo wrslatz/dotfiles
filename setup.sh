@@ -1,7 +1,7 @@
 #!/bin/sh
 # setup.sh: Setup script to initialize a new system with zsh, Homebrew, oh-my-zsh, and wrslatz's dotfiles managed by chezmoi.
 # To download this script, run:
-#   curl -fsSL https://raw.githubusercontent.com/wrslatz/dotfiles/master/setup.sh -o setup.sh
+#   curl -fsSL https://raw.githubusercontent.com/wrslatz/dotfiles/main/setup.sh -o setup.sh
 # Then, review the script to ensure you trust it, and then execute it with:
 #   sh setup.sh
 # You can remove the script after setup completes, if desired:
