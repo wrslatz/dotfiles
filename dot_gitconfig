@@ -1,0 +1,11 @@
+[user]
+	email = wrslatz@gmail.com
+	name = wrslatz
+	signingkey = E946EC2984706455F552F15017927ECF7078E6D4
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/linuxbrew/.linuxbrew/bin/gh auth git-credential
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true

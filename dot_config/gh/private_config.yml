@@ -1,0 +1,37 @@
+# The current version of the config schema
+version: 1
+# What protocol to use when performing git operations. Supported values: ssh, https
+git_protocol: https
+# What editor gh should run when creating issues, pull requests, etc. If blank, will refer to environment.
+editor:
+# When to interactively prompt. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
+prompt: enabled
+# Preference for editor-based interactive prompting. This is a global config that cannot be overridden by hostname. Supported values: enabled, disabled
+prefer_editor_prompt: disabled
+# A pager program to send command output to, e.g. "less". If blank, will refer to environment. Set the value to "cat" to disable the pager.
+pager:
+# Aliases allow you to create nicknames for gh commands
+aliases:
+    co: pr checkout
+    amend: '!git commit --amend --no-edit'
+    amend-force-push: '!git commit --amend --no-edit && git push -f'
+    checkout-b: '!git switch -c $1'
+    public-user-check: '!echo "\ngpg --list-secret-keys --keyid-format=long" && gpg --list-secret-keys --keyid-format=long && echo "\ngit config user.signingKey" && git config user.signingKey'
+    rebase-push-origin: '!gh rebase-push origin $1'
+    rebase-push-origin-force: '!gh rebase-push-force origin $1'
+    rebase-push: '!git pull $1 $2 --rebase && git push'
+    rebase-push-force: '!git pull $1 $2 --rebase && git push -f'
+    rebase-push-upstream: '!gh rebase-push upstream $1'
+    rebase-push-upstream-force: '!gh rebase-push-force upstream $1'
+    rebase-push-origin-main: '!gh rebase-push-origin main'
+    rebase-push-origin-main-force: '!gh rebase-push-origin-force main'
+    rebase-push-upstream-main: '!gh rebase-push-upstream main'
+    rebase-push-upstream-main-force: '!gh rebase-push-upstream-force main'
+    reset-remote: '!git checkout $2 && git fetch -p && git pull $1 $2'
+    reset-remote-force: '!git checkout $2 && git fetch -p && git reset --hard $1/$2'
+    reset-remote-origin-main: '!gh reset-remote origin main'
+    reset-remote-upstream-main: '!gh reset-remote upstream main'
+# The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
+http_unix_socket:
+# What web browser gh should use when opening URLs. If blank, will refer to environment.
+browser: wslview
