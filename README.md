@@ -10,3 +10,4 @@ My dotfiles for my local environment setup
 Currently not managed by chezmoi
 
 - apt dependencies
+- gpg keys
