@@ -1,0 +1,11 @@
+default-cache-ttl 28800
+max-cache-ttl 86400
+
+# WSL-specific settings
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+
+pinentry-program /usr/bin/pinentry-gtk-2
+
+{{   end }}
+{{ end }}
