@@ -93,7 +93,7 @@ source $ZSH/oh-my-zsh.sh
 # fi
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# export ARCHFLAGS="-arch $(uname -m)"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -103,10 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
