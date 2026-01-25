@@ -10,8 +10,6 @@ brew "fnm"
 brew "gh"
 # Rust toolchain installer
 brew "rustup"
-# Command-line interface for https://speedtest.net bandwidth tests
-brew "speedtest-cli"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Lookup tool for domain names and other internet resources
