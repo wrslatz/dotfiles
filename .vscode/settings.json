@@ -1,0 +1,7 @@
+{
+    "go.diagnostic.vulncheck": "Imports",
+    "files.associations": {
+        "**/*.sh.tml": "shellscript",
+        ".chezmoiignore": "properties"
+    }
+}

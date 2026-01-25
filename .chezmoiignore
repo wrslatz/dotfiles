@@ -1,2 +1,5 @@
+# General ignore
+
 README.md
 LICENSE
+.vscode
