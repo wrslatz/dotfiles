@@ -6,3 +6,7 @@ My dotfiles for my local environment setup
 - Zsh, [Oh My Zsh](https://ohmyz.sh/), and [Starship](https://starship.rs/) for shell and prompt
 - [Homebrew on Linux](https://docs.brew.sh/Homebrew-on-Linux) for managing dependencies
 - [Visual Studio Code](https://code.visualstudio.com/) for IDE
+
+Currently not managed by chezmoi
+
+- apt dependencies
