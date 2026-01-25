@@ -11,3 +11,7 @@ Currently not managed by chezmoi
 
 - apt dependencies
 - gpg keys
+
+## Usage
+
+To setup a new machine, review and follow the instructions in [`setup.sh`](setup.sh).
