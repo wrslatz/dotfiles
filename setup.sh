@@ -13,7 +13,8 @@ printf "1. Install and change your default shell to zsh\n"
 printf "2. Install git (dependency of Homebrew)\n"
 printf "3. Install Homebrew\n"
 printf "4. Install oh-my-zsh framework\n"
-printf "5. Install chezmoi and apply wrslatz's dotfiles configuration\n"
+printf "5. Install Rust\n"
+printf "6. Install chezmoi and apply wrslatz's dotfiles configuration\n"
 printf "Do you want to proceed? (y/n) "
 read -r PROCEED_REPLY
 printf "\n"
@@ -80,6 +81,15 @@ else
     printf "Installing oh-my-zsh...\n"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+# Install Rust, if necessary
+if command -v rustc >/dev/null 2>&1; then
+    printf "Rust is already installed.\n"
+else
+    printf "Installing Rust...\n"
+    sh -c "$(curl https://sh.rustup.rs -fsSL)"
+fi
+
 
 # Install chezmoi, if necessary
 if command -v chezmoi >/dev/null 2>&1; then
