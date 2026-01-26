@@ -101,6 +101,4 @@ else
 fi
 
 # Finally, source zsh configuration to complete setup
-printf "Sourcing zsh configuration to finalize setup...\n"
-source ~/.zshrc
-printf "Setup complete!"
+printf "Setup complete! Please restart your terminal to apply all changes.\n"
