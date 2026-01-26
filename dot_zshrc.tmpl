@@ -129,9 +129,6 @@ fi
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-export BROWSER=wslview
-export GPG_TTY=$(tty)
-
 # Go
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
@@ -142,3 +139,12 @@ eval "$(fnm env --use-on-cd)"
 
 # Starship
 eval "$(starship init zsh)"
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# WSL-specific settings
+export BROWSER=wslview
+export GPG_TTY=$(tty)
+
+{{   end }}
+{{ end }}
