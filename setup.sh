@@ -32,10 +32,18 @@ else
     if [ -z "$ZSH_PATH" ]; then
         printf "zsh not found in PATH. Installing zsh...\n"
         sudo apt install zsh
-        chsh -s "$(command -v zsh)"
     else
         printf "zsh is already installed.\n"
     fi
+fi
+
+# Set zsh as the default shell for the user, if not already set
+CURRENT_SHELL=$(awk -F: -v user="$USER" '$1 == user {print $NF}' /etc/passwd)
+if [ "$CURRENT_SHELL" != "$(command -v zsh)" ]; then
+    printf "Changing default shell to zsh...\n"
+    sudo usermod -s "$(command -v zsh)" "$USER"
+else
+    printf "Default shell is already zsh\n"
 fi
 
 # Install git (prerequisite for Homebrew), if not already installed
@@ -100,5 +108,4 @@ else
     exit 1
 fi
 
-# Finally, source zsh configuration to complete setup
 printf "Setup complete! Please restart your terminal to apply all changes.\n"
