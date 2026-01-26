@@ -26,7 +26,7 @@ fi
 
 # Install zsh, if necessary
 if [ -n "$ZSH_VERSION" ]; then
-    printf "Current shell is already zsh\n"
+    printf "Current shell is already zsh.\n"
 else
     ZSH_PATH=$(command -v zsh)
     if [ -z "$ZSH_PATH" ]; then
@@ -43,12 +43,12 @@ if [ "$CURRENT_SHELL" != "$(command -v zsh)" ]; then
     printf "Changing default shell to zsh...\n"
     sudo usermod -s "$(command -v zsh)" "$USER"
 else
-    printf "Default shell is already zsh\n"
+    printf "Default shell is already zsh.\n"
 fi
 
 # Install git (prerequisite for Homebrew), if not already installed
 if command -v git >/dev/null 2>&1; then
-    printf 'git is already installed\n'
+    printf 'git is already installed.\n'
 else
     printf 'Installing git...\n'
     sudo apt install git
@@ -56,7 +56,7 @@ fi
 
 # Install Homebrew, if necessary
 if command -v brew >/dev/null 2>&1; then
-    printf 'Homebrew is already installed\n'
+    printf 'Homebrew is already installed.\n'
 else
     printf 'Installing Homebrew...\n'
     # Only install Homebrew, do not modify shell files as they are managed by chezmoi
@@ -75,7 +75,7 @@ fi
 
 # Install oh-my-zsh, if necessary
 if [ -d "$HOME/.oh-my-zsh" ]; then
-    printf "oh-my-zsh is already installed\n"
+    printf "oh-my-zsh is already installed.\n"
 else
     printf "Installing oh-my-zsh...\n"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -83,7 +83,7 @@ fi
 
 # Install chezmoi, if necessary
 if command -v chezmoi >/dev/null 2>&1; then
-    printf "chezmoi is already installed\n"
+    printf "chezmoi is already installed.\n"
 else
     printf "Installing chezmoi...\n"
     brew install chezmoi
