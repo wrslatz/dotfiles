@@ -8,6 +8,8 @@ brew "dotnet"
 brew "fnm"
 # GitHub command-line tool
 brew "gh"
+# Pre-commit re-implemented in Rust
+brew "prek"
 # Rust toolchain installer
 brew "rustup"
 # Cross-shell prompt for astronauts
