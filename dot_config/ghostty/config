@@ -52,4 +52,4 @@ copy-on-select = clipboard
 theme = GitHub Dark Default
 cursor-style = block
 cursor-color = white
-shell-integration-features = no-cursor
+shell-integration-features = no-cursor, sudo
