@@ -33,6 +33,6 @@ alias diff_chezmoi='printf "Diffing chezmoi remote and local...\n" && chezmoi gi
 alias sync_chezmoi='printf "Syncing chezmoi...\n" && diff_chezmoi && chezmoi update && printf "chezmoi updated!\n"'
 
 # general aliases
-alias update_tools='printf "Updating tools...\n" && sudo apt update && sudo apt upgrade && sudo apt autoremove && diff_chezmoi && sync_chezmoi && update_brew && backup_brew && omz update && sync_chezmoi && printf "All tools updated!"'
+alias update_tools='printf "Updating tools...\n" && sudo apt update && sudo apt upgrade && sudo apt autoremove && sync_chezmoi && update_brew && backup_brew && omz update && sync_chezmoi && printf "All tools updated!"'
 alias update_os='sudo apt dist-upgrade && sudo do-release-upgrade -d'
 alias src="source ~/.zshrc"
