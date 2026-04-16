@@ -13,7 +13,7 @@ check_chezmoi_diff_status(){
     printf "Diffing chezmoi against local state...\n"
     if [ -n "$(chezmoi diff --no-pager)" ]; then
         printf "Error: chezmoi local changes are not synced to chezmoi. Please review chezmoi and local state, then apply and/or re-apply changes where needed.\n"
-        chezmoi git diff --no-pager
+        chezmoi diff --no-pager
         return 1
     fi
     printf "chezmoi is in sync with local changes.\n"
