@@ -26,7 +26,7 @@ alias ll='ls -ltraF'  # list all
 # brew aliases
 alias sync_brew='printf "Updating and applying ~/.Brewfile...\n" && chezmoi update --apply=false && chezmoi apply ~/.Brewfile && printf "~/.Brewfile updated and applied!\n"'
 alias backup_brew='printf "Backing up brew to ~/.Brewfile and syncing w/ chezmoi...\n" && brew bundle dump --global --describe --force && chezmoi re-add ~/.Brewfile && printf "brew backup complete!\n"'
-alias update_brew='printf "Updating brew and dependencies...\n" && brew update && (brew bundle check --global || brew bundle install --global) && brew upgrade && brew cleanup && printf "brew and dependencies updated!\n"'
+alias update_brew='printf "Updating brew and dependencies...\n" && brew update && (brew bundle check --global --verbose || brew bundle install --global --verbose) && brew upgrade && brew cleanup && printf "brew and dependencies updated!\n"'
 
 # chezmoi aliases
 alias diff_chezmoi='printf "Diffing chezmoi remote and local...\n" && chezmoi git pull && check_chezmoi_git_status && check_chezmoi_diff_status && printf "chezmoi remote and local are in sync.\n"'
