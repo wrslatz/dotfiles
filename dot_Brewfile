@@ -11,6 +11,8 @@ brew "fnm"
 brew "gh"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Find what models run on your hardware
+brew "llmfit"
 # Pre-commit re-implemented in Rust
 brew "prek"
 # Rust toolchain installer
