@@ -70,6 +70,42 @@ ZSH_THEME=""
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+######################################################
+# Custom setup to load before OMZ
+######################################################
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Brew ZSH
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    autoload -Uz compinit
+    compinit
+fi
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Go
+export GOROOT="$(brew --prefix golang)/libexec"
+# export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
+export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+
+# Node.js
+eval "$(fnm env --use-on-cd)"
+
+# Starship
+eval "$(starship init zsh)"
+
+{{ if eq .chezmoi.os "linux" }}
+{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
+# WSL-specific settings
+export BROWSER=wslview
+export GPG_TTY=$(tty)
+
+{{   end }}
+{{ end }}
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -111,42 +147,3 @@ HISTSIZE=1000
 SAVEHIST=1000
 bindkey -e
 # End of lines configured by zsh-newuser-install
-
-# The following lines were added by compinstall
-zstyle :compinstall filename '/home/wrslatz/.zshrc'
-
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-# Brew ZSH
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
-    autoload -Uz compinit
-    compinit
-fi
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# Go
-export GOROOT="$(brew --prefix golang)/libexec"
-# export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
-
-# Node.js
-eval "$(fnm env --use-on-cd)"
-
-# Starship
-eval "$(starship init zsh)"
-
-{{ if eq .chezmoi.os "linux" }}
-{{   if (.chezmoi.kernel.osrelease | lower | contains "microsoft") }}
-# WSL-specific settings
-export BROWSER=wslview
-export GPG_TTY=$(tty)
-
-{{   end }}
-{{ end }}
