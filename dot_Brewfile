@@ -13,7 +13,7 @@ brew "gh"
 brew "go"
 # Find what models run on your hardware
 brew "llmfit"
-# Pre-commit re-implemented in Rust
+# Fast Git hook manager written in Rust, drop-in alternative to pre-commit
 brew "prek"
 # Rust toolchain installer
 brew "rustup"
