@@ -74,16 +74,22 @@ ZSH_THEME=""
 # Custom setup to load before OMZ
 ######################################################
 
+# Load custom completions
+fpath=(~/.oh-my-zsh/custom/completions $fpath)
+
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Brew ZSH
 if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+    FPATH=$FPATH:$(brew --prefix)/share/zsh-completions
     autoload -Uz compinit
     compinit
 fi
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# GitHub Copilot
+copilot completion zsh > "${fpath[1]}/_copilot"
 
 # Go
 export GOROOT="$(brew --prefix golang)/libexec"
