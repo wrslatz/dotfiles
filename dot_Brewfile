@@ -1,4 +1,4 @@
-tap "docker/tap"
+tap "docker/tap", trusted: true
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Collection of Linux utilities
